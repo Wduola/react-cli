@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jsx语法练习</title>
+  </head>
+  <body>
+    <!-- 创建容器 -->
+    <div id="root"></div>
+
+    <!-- react核心js -->
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+
+    <!-- jsx -->
+    <script type="text/babel">
+      const list = ["jQuery", "React", "Vue", "NodeJS", "Bootstrap"];
+      // 1.创建虚拟DOM对象
+      const vDOM = (
+        <ul>
+          {list.map((data, index) => {
+            return <li key={index}>{data}</li>;
+          })}
+        </ul>
+      );
+      // 2.渲染虚拟DOM到指定容器
+      ReactDOM.render(vDOM, document.getElementById("root"));
+    </script>
+  </body>
+</html>

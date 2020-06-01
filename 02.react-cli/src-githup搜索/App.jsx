@@ -4,17 +4,17 @@
 import React from "react";
 
 // 子组件
-import Login from "./pages/HOC/Login";
-import Register from "./pages/HOC/Register";
+import Search from "./pages/Search";
+import List from "./pages/List";
 
 // 定义ES6类组件，组件名App
 class App extends React.Component {
   render() {
     return (
-      <>
-        <Login />
-        <Register />
-      </>
+      <div className="container">
+        <Search />
+        <List />
+      </div>
     );
   }
 }

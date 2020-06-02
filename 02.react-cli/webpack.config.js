@@ -21,6 +21,7 @@ module.exports = {
   output: {
     path: undefined, // 输出的目录
     filename: "[name].js", // 输出文件名
+    publicPath: "/", // 将所有webpack输出的资源，引入路由都以 / 开头
   },
   // 加载器
   module: {
@@ -108,6 +109,7 @@ module.exports = {
     hot: true,
     quiet: false, // 启用静默模式，在终端不打印多余信息
     clientLogLevel: "none", // 在浏览器控制台不打印多余内容
+    historyApiFallback: true, //history
     proxy: {
       // 配置代理服务器
       "/api": {

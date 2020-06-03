@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 
-export default class News extends Component {
+export default class Hot extends Component {
   render() {
     return (
       <div>
-        <h2>news·····</h2>
+        <h2>Hot</h2>
+        <p>HotHotHot</p>
       </div>
     );
   }

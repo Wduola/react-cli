@@ -1,19 +1,24 @@
-// 用来创建action对象工厂函数模块
-// action对象：{type: 更新类型, data: 参与更新的数据}
+// redux-thunk 中间件
+// 将action creators分为同步action creators和异步action creators
 
-// 引入常量
 import { INCREMENT, DECREMENT } from "./constants";
 
-// 加法  因为data的值不确定，所以传形参
-export const increment = (number) => {
-  return {
-    type: INCREMENT,
-    data: number,
-  };
-};
+export const increment = (number) => ({
+  type: INCREMENT, //更新类型
+  data: number, //参与更新的数据
+});
 
-// 减法
 export const decrement = (number) => ({
   type: DECREMENT,
   data: number,
 });
+
+export const incrementAsync = (number) => {
+  return (dispatch) => {
+    // 执行异步代码
+    setTimeout(() => {
+      const action = increment(number);
+      dispatch(action);
+    }, 1000);
+  };
+};

@@ -1,62 +1,61 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { increment, decrement, incrementAsync } from "./redux/actions";
 
-export default class App extends Component {
+// 装饰器语法
+@connect((state) => ({ count: state.count }), { increment, decrement, incrementAsync })
+// UI组件（被包装组件）
+class App extends Component {
   state = {
-    count: 0,
     number: 1,
   };
-  // 收集数据
   handleChange = (event) => {
     this.setState({
       number: +event.target.value,
     });
   };
-  // 加
+  // 加法
   increment = () => {
-    const { count, number } = this.state;
-    this.setState({
-      count: count + number,
-    });
+    const number = this.state.number;
+    this.props.increment(number);
   };
-  // 减
+  // 减法
   decrement = () => {
-    const { count, number } = this.state;
-    this.setState({
-      count: count - number,
-    });
+    const number = this.state.number;
+    this.props.decrement(number);
   };
-  // 奇数加
-  incrementOdd = () => {
-    const { count, number } = this.state;
+  // 奇数求和
+  incrementIfOdd = () => {
+    const { count } = this.props;
+    // 判断如果是奇数执行
     if (count & 1) {
-      this.setState({
-        count: count + number,
-      });
+      const number = this.state.number;
+      this.props.increment(number);
     }
   };
+  // 异步去和
   incrementAsync = () => {
-    setTimeout(() => {
-      const { count, number } = this.state;
-      this.setState({
-        count: count + number,
-      });
-    }, 1000);
+    const number = this.state.number;
+    this.props.incrementAsync(number);
   };
   render() {
-    const { count } = this.state;
+    const count = this.props.count;
     return (
-      <>
+      <div>
+        <h1>redux 计算</h1>
         <p>click {count} times</p>
         <select onChange={this.handleChange}>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
         </select>
         <button onClick={this.increment}>+</button>
         <button onClick={this.decrement}>-</button>
-        <button onClick={this.incrementOdd}>偶数 +</button>
-        <button onClick={this.incrementAsync}>异步 +</button>
-      </>
+        <button onClick={this.incrementIfOdd}>奇数求和</button>
+        <button onClick={this.incrementAsync}>异步求和</button>
+      </div>
     );
   }
 }
+export default App;
